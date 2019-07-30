@@ -33,3 +33,27 @@ function drawBoard() {
     }
 
     drawBoard();
+
+const PIECES = [
+    [Z, 'red'],
+    [S, 'green'],
+    [T, 'yellow'],
+    [O, 'blue'],
+    [L, 'purple'],
+    [I, 'cyan'],
+    [J, 'orange']
+];
+
+let p = new Piece( PIECES[0][0], PIECES[0][1] );
+
+
+function Piece(tetromino, color) {
+    this.tetromino = tetromino;
+    this.color = color;
+
+    this.tetrominoN = 0;
+    this.activeTetromino = this.tetromino[this.tetrominoN];
+
+    this.x = 0;
+    this.y = 0;
+}
