@@ -85,6 +85,8 @@ Piece.prototype.movedown = function () {
   this.draw();
 };
 
+let dropStart = Date.now();
+
 function drop() {
     let now = Date.now();
     let delta = now - dropStart;
