@@ -54,8 +54,8 @@ function Piece(tetromino, color) {
     this.tetrominoN = 0;
     this.activeTetromino = this.tetromino[this.tetrominoN];
 
-    this.x = 3;
-    this.y = 5;
+    this.x = 0;
+    this.y = 0;
 }
 
 Piece.prototype.draw = function () {
@@ -68,4 +68,15 @@ Piece.prototype.draw = function () {
         }
     };
 
-p.draw();
+
+Piece.prototype.movedown = function () {
+  this.y++;
+  this.draw();
+};
+
+function drop() {
+    p.movedown();
+    requestAnimationFrame(drop);
+}
+
+drop();
