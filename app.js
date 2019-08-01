@@ -68,14 +68,29 @@ Piece.prototype.draw = function () {
         }
     };
 
+Piece.prototype.unDraw = function () {
+    for (r = 0; r < this.activeTetromino.length; r++) {
+        for (c = 0; c < this.activeTetromino.length; c++) {
+            if (this.activeTetromino[r][c]) {
+                drawSquare(this.x + c, this.y + r, VACANT)
+            }
+        }
+    }
+};
+
 
 Piece.prototype.movedown = function () {
+    this.unDraw();
   this.y++;
   this.draw();
 };
 
 function drop() {
-    p.movedown();
+    let now = Date.now();
+    let delta = now - dropStart;
+    if (delta > 1000) {
+        p.movedown();
+    }
     requestAnimationFrame(drop);
 }
 
