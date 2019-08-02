@@ -85,6 +85,7 @@ Piece.prototype.movedown = function () {
   this.draw();
 };
 
+
 let dropStart = Date.now();
 
 function drop() {
