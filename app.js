@@ -58,31 +58,35 @@ function Piece(tetromino, color) {
     this.y = 0;
 }
 
-Piece.prototype.draw = function () {
-    for (r = 0; r < this.activeTetromino.length; r++) {
-            for (c = 0; c < this.activeTetromino.length; c++) {
-               if (this.activeTetromino[r][c]) {
-                   drawSquare(this.x + c, this.y + r, this.color)
-               }
-            }
-        }
-    };
-
-Piece.prototype.unDraw = function () {
+Piece.prototype.fill = function (color) {
     for (r = 0; r < this.activeTetromino.length; r++) {
         for (c = 0; c < this.activeTetromino.length; c++) {
             if (this.activeTetromino[r][c]) {
-                drawSquare(this.x + c, this.y + r, VACANT)
+                drawSquare(this.x + c, this.y + r, color)
             }
         }
     }
 };
 
+Piece.prototype.draw = function () {
+        this.fill(this.color);
+    };
+
+Piece.prototype.unDraw = function () {
+        this.fill(VACANT);
+};
+
 
 Piece.prototype.movedown = function () {
     this.unDraw();
-  this.y++;
-  this.draw();
+    this.y++;
+    this.draw();
+};
+
+Piece.prototype.movedown = function () {
+    this.unDraw();
+    this.y++;
+    this.draw();
 };
 
 
@@ -93,6 +97,7 @@ function drop() {
     let delta = now - dropStart;
     if (delta > 1000) {
         p.movedown();
+        dropStart = Date.now()
     }
     requestAnimationFrame(drop);
 }
