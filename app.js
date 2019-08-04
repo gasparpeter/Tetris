@@ -83,12 +83,24 @@ Piece.prototype.movedown = function () {
     this.draw();
 };
 
-Piece.prototype.movedown = function () {
+Piece.prototype.moveRight = function () {
     this.unDraw();
-    this.y++;
+    this.x++;
     this.draw();
 };
 
+Piece.prototype.moveLeft = function () {
+    this.unDraw();
+    this.x--;
+    this.draw();
+};
+
+Piece.prototype.rotate = function () {
+    this.unDraw();
+    this.tetrominoN = (this.tetrominoN + 1)%this.tetromino.length;
+    this.activeTetromino = this.tetromino[this.tetrominoN];
+    this.draw();
+};
 
 let dropStart = Date.now();
 
