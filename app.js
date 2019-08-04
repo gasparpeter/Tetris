@@ -77,7 +77,7 @@ Piece.prototype.unDraw = function () {
 };
 
 
-Piece.prototype.movedown = function () {
+Piece.prototype.moveDown = function () {
     this.unDraw();
     this.y++;
     this.draw();
@@ -102,13 +102,28 @@ Piece.prototype.rotate = function () {
     this.draw();
 };
 
+
+document.addEventListener('keydown', CONTROL);
+function CONTROL() {
+    if (event.keyCode == 37) {
+        p.moveLeft();
+    }else if (event.keyCode == 38) {
+        p.rotate();
+    }else if (event.keyCode == 39) {
+        p.moveRight()
+    }else if (event.keyCode == 40) {
+        p.moveDown()
+    }
+}
+
+
 let dropStart = Date.now();
 
 function drop() {
     let now = Date.now();
     let delta = now - dropStart;
     if (delta > 1000) {
-        p.movedown();
+        p.moveDown();
         dropStart = Date.now()
     }
     requestAnimationFrame(drop);
