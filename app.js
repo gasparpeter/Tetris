@@ -78,28 +78,45 @@ Piece.prototype.unDraw = function () {
 
 
 Piece.prototype.moveDown = function () {
+    if (!this.collision()) {
+        this.unDraw();
+        this.y++;
+        this.draw();
+    }else {
+        
+    }
+
     this.unDraw();
     this.y++;
     this.draw();
 };
 
 Piece.prototype.moveRight = function () {
-    this.unDraw();
-    this.x++;
-    this.draw();
+    if (!this.collision()) {
+        this.unDraw();
+        this.x++;
+        this.draw();
+    }
+
 };
 
 Piece.prototype.moveLeft = function () {
-    this.unDraw();
-    this.x--;
-    this.draw();
+    if (!this.collision()) {
+        this.unDraw();
+        this.x--;
+        this.draw();
+    }
+
 };
 
 Piece.prototype.rotate = function () {
-    this.unDraw();
-    this.tetrominoN = (this.tetrominoN + 1)%this.tetromino.length;
-    this.activeTetromino = this.tetromino[this.tetrominoN];
-    this.draw();
+    if (!this.collision()) {
+        this.unDraw();
+            this.tetrominoN = (this.tetrominoN + 1)%this.tetromino.length;
+            this.activeTetromino = this.tetromino[this.tetrominoN];
+            this.draw();
+    }
+
 };
 
 Piece.prototype.collision = function(x,y,piece) {
