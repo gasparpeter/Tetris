@@ -102,15 +102,43 @@ Piece.prototype.rotate = function () {
     this.draw();
 };
 
+Piece.prototype.collision = function(x,y,piece) {
+    for (r = 0; r < piece.length; r++) {
+        for (c = 0; c < this.activeTetromino.length; c++) {
+            if (!piece[r][c]) {
+                continue;
+            }
+            let newX = this.x + c + x;
+            let newY = this.y + r + x;
+            
+            if (newX < 0 || newX >= COL || newY >= ROW) {
+                return true;
+            }
+            
+            if (newY > 0) {
+                continue;
+            }
+
+            if ( board[newY][newX] != VACANT) {
+                return true;
+            }
+        }
+    }
+    return false;
+};
 
 document.addEventListener('keydown', CONTROL);
+
 function CONTROL() {
     if (event.keyCode == 37) {
         p.moveLeft();
+        dropStart = Date.now();
     }else if (event.keyCode == 38) {
         p.rotate();
+        dropStart = Date.now();
     }else if (event.keyCode == 39) {
         p.moveRight()
+        dropStart = Date.now();
     }else if (event.keyCode == 40) {
         p.moveDown()
     }
