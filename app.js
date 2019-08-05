@@ -78,7 +78,7 @@ Piece.prototype.unDraw = function () {
 
 
 Piece.prototype.moveDown = function () {
-    if (!this.collision()) {
+    if (!this.collision(0, 1, this.active.Tetromino)) {
         this.unDraw();
         this.y++;
         this.draw();
@@ -92,7 +92,7 @@ Piece.prototype.moveDown = function () {
 };
 
 Piece.prototype.moveRight = function () {
-    if (!this.collision()) {
+    if (!this.collision(1, 0, this.active.Tetromino)) {
         this.unDraw();
         this.x++;
         this.draw();
@@ -101,7 +101,7 @@ Piece.prototype.moveRight = function () {
 };
 
 Piece.prototype.moveLeft = function () {
-    if (!this.collision()) {
+    if (!this.collision(-1, 0, this.active.Tetromino)) {
         this.unDraw();
         this.x--;
         this.draw();
@@ -110,7 +110,8 @@ Piece.prototype.moveLeft = function () {
 };
 
 Piece.prototype.rotate = function () {
-    if (!this.collision()) {
+    let nextPattern = this.tetromino[(this.tetromino + 1)%this.tetromino.length];
+    if (!this.collision(0, 0, nextPattern)) {
         this.unDraw();
             this.tetrominoN = (this.tetrominoN + 1)%this.tetromino.length;
             this.activeTetromino = this.tetromino[this.tetrominoN];
