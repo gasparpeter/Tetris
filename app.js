@@ -111,8 +111,19 @@ Piece.prototype.moveLeft = function () {
 
 Piece.prototype.rotate = function () {
     let nextPattern = this.tetromino[(this.tetromino + 1)%this.tetromino.length];
-    if (!this.collision(0, 0, nextPattern)) {
-        this.unDraw();
+    let kick = 0;
+    
+    if (this.collision(0,0,nextPattern)) {
+        if (this.x > COL/2) {
+            kick = -1;
+        }else {
+            kick = 1;
+        }
+    }
+    
+    if (!this.collision(kick, 0, 0, nextPattern)) {
+            this.unDraw();
+            this.x += kick;
             this.tetrominoN = (this.tetrominoN + 1)%this.tetromino.length;
             this.activeTetromino = this.tetromino[this.tetrominoN];
             this.draw();
