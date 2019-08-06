@@ -44,6 +44,11 @@ const PIECES = [
     [J, "orange"]
 ];
 
+function randomPiece(){
+    let r = randomN = Math.floor(Math.random() * PIECES.length) // 0 -> 6
+    return new Piece( PIECES[r][0],PIECES[r][1]);
+}
+
 let p = new Piece( PIECES[0][0], PIECES[0][1] );
 
 
